@@ -15,7 +15,7 @@ class App extends React.Component {
       active : {
         0 : <Articles/>,
         1 : <Users/>,
-        2 : <NewArticle/>
+        2 : <NewArticle switchPage={this.switchPage.bind(this)}/>
       }
     };
   }

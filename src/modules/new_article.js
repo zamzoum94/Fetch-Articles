@@ -1,43 +1,33 @@
 import React from 'react';
-
+import ArticeDetails from './article_details';
+import UserDetails from './user_details';
 
 export default class NewArticle extends React.Component{
+    constructor(props){
+        super();
+        this.props = props;
+        this.state ={
+            form : {
+                0 : <UserDetails nextForm={this.nextForm.bind(this)}/>,
+                1 : <ArticeDetails switchPage = {props.switchPage.bind(this)}/> 
+            },
+            currForm : 0
+        }
+    }
+
+    nextForm(){
+        this.setState({
+            currForm : 1
+        });
+    }
+
     render(){
         return(
-            <form>
+            <form method='POST' method='/postarticle'>
                 <div className='form-group'>
-                    <div className='row'>
-                        <div className='col-md-3'>
-                            <input className='form-control' type='text' placeholder='Name' name='nameUser' id='nameUser' required/>
-                        </div>
-                    </div>
-                    <div className='row spaceRow'>
-                        <div className='col-md-3'>
-                            <input className='form-control' type='email' placeholder='Email' name='email' id='email' required/>
-                        </div>
-                    </div>
-                    <div className='row spaceRow'>
-                        <div className='col-md-3'>
-                            <input className='form-control' type='text' placeholder='Image' name='urlImage' id='urlImage' required/>
-                        </div>
-                    </div>
-                    <div className='row spaceRow'>
-                        <div className='col-md-3'>
-                            <input className='form-control' type='text' placeholder='Title' name='title' id='title' required/>
-                        </div>
-                    </div>
-                    <div className='row spaceRow'>
-                        <div className='col-md-3'>
-                            <input className='form-control descriptionRow' type='textarea' rows='2' placeholder='Description' name='title' id='title' required/>
-                        </div>
-                    </div>
-                    <div className='row spaceRow'>
-                        <div className='col-md-5'>
-                            <input className='form-control context' type='textarea' rows='6' placeholder='Context' name='context' id='context' required/>
-                        </div>
-                    </div>
+                    {this.state.form[this.state.currForm]}
                 </div>
-            </form>
-        )
+            </form>    
+        );
     }
 }
