@@ -2,25 +2,38 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Header from './modules/header';
+import Users from './modules/users'
+import NewArticle from './modules/new_article';
+import Articles from './modules/articles';
+
+class App extends React.Component {
+  constructor(){
+    super();
+    this.state ={
+      curr: 0,
+      active : {
+        0 : <Articles/>,
+        1 : <Users/>,
+        2 : <NewArticle/>
+      }
+    };
+  }
+
+  switchPage(id){
+    this.setState({
+      curr : id
+    });
+  }
+
+  render(){
+    return (
+      <div className='container'>
+        <Header switchPage={this.switchPage.bind(this)}/>
+        {this.state.active[this.state.curr]}
+      </div>
+    ); 
+  }
 }
 
 export default App;
