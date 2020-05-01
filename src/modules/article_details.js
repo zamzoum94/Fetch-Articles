@@ -24,11 +24,6 @@ export default class ArticleDetails extends React.Component{
                 </div>
                 <div className='row spaceRow'>
                     <div className='col-md-3'>
-                        <input className='form-control' type='text' placeholder='Image' name='articleImage' id='articleImage' onChange={this.handleInput.bind(this)} required/>
-                    </div>
-                </div>
-                <div className='row spaceRow'>
-                    <div className='col-md-3'>
                         <input className='form-control descriptionRow' type='textarea' rows='2' placeholder='Description' name='description' id='description' onChange={this.handleInput.bind(this)} required/>
                     </div>
                 </div>

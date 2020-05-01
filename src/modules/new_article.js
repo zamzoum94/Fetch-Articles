@@ -16,10 +16,10 @@ export default class NewArticle extends React.Component{
 
         this.newArticle = {
             title : null,
-            articleImage: null,
             description : null,
             context : null
         }
+
         this.state ={
             form : {
                 0 : <UserDetails nextForm={this.nextForm.bind(this)} user={this.newUser}/>,
@@ -37,8 +37,17 @@ export default class NewArticle extends React.Component{
 
     handleSubmit(){
         this.props.switchPage(0);
-        console.log(this.newUser);
-        console.log(this.newArticle);
+        let user = this.newUser;
+        for(let key in this.newArticle){
+            user[key] = this.newArticle[key];
+        }
+        fetch('http://localhost:3000/postarticle', {
+            method : 'POST',
+            headers : {
+                'Content-Type' : 'application/json'
+            },
+            body : JSON.stringify(user)
+        });
     }
 
     render(){
