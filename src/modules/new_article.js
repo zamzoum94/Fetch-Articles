@@ -6,10 +6,24 @@ export default class NewArticle extends React.Component{
     constructor(props){
         super();
         this.props = props;
+
+        this.newUser = {
+            name : null,
+            email : null,
+            age : null,
+            userUrlImage : null
+        }
+
+        this.newArticle = {
+            title : null,
+            articleImage: null,
+            description : null,
+            context : null
+        }
         this.state ={
             form : {
-                0 : <UserDetails nextForm={this.nextForm.bind(this)}/>,
-                1 : <ArticeDetails switchPage = {props.switchPage.bind(this)}/> 
+                0 : <UserDetails nextForm={this.nextForm.bind(this)} user={this.newUser}/>,
+                1 : <ArticeDetails article={this.newArticle} handleSubmit={this.handleSubmit.bind(this)}/> 
             },
             currForm : 0
         }
@@ -19,6 +33,12 @@ export default class NewArticle extends React.Component{
         this.setState({
             currForm : 1
         });
+    }
+
+    handleSubmit(){
+        this.props.switchPage(0);
+        console.log(this.newUser);
+        console.log(this.newArticle);
     }
 
     render(){
