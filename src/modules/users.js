@@ -3,35 +3,53 @@ import { createPortal } from 'react-dom';
 
 
 export default class Users extends React.Component{
-    constructor(){
+    constructor(props){
         super();
+        this.props = props;
         this.state = {
             output : null
         }
         this.done = false;
     }
 
+
+    filterData(data){
+        let result = [];
+        for(let i = 0; i < data.length; ++i){
+            let contains = false;
+            for(let j = 0; j < result.length && !contains; ++j){
+                if(result[j].name === data[i].name){
+                    contains = true;
+                }
+            }
+            if(!contains){
+                result.push(data[i]);
+            }   
+        }
+        return result;
+    }
+
     contructDiv(data){
-        console.log('constructtttttttttttttttttt ', data)
+        data = this.filterData(data);
         return(
-            <div>
-                {data.map((element, index) =>{
-                    if(index % 3 === 0){
-                        return(
-                            <div className='row'>
-                                <div className='col-md-3' key={index}>
-                                    {element.name}
+            <div className='row spaceRow'>
+                {data.map((element, index)=>{
+                    return(
+                        <div className='col-md-4 spaceRow'>
+                            <div className = 'card'>
+                                <img src={element.userUrlImage} className='card-img-top imgContainer' alt='author'></img>
+                                <div className='card-body'>
+                                    <h5 className='card-title'>{element.name}</h5>
+                                    <p className='card-text'>
+                                        Age: {element.age} <br/>
+                                        Email: {element.email}
+                                    </p>
+                                    <a href="#" className="btn btn-primary" onClick={()=>{this.props.switchPage(4, element.name)}}>Check Profile</a>
                                 </div>
                             </div>
-                        )
-                    } else{
-                        return(
-                            <div className='col-md-3 offset-md-1' key={index}>
-                                {element.name}
-                            </div>
-                        )
-                    }
-                })};
+                        </div>
+                    )
+                })}
             </div>
         )
     }
@@ -60,7 +78,6 @@ export default class Users extends React.Component{
         this.fetchData();
         return(
             <div>
-                <h1>This is Users</h1>
                 {this.state.output}
             </div>
         )

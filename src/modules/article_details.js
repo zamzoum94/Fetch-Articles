@@ -17,24 +17,24 @@ export default class ArticleDetails extends React.Component{
     render(){
         return(
             <div>
-                <div className='row spaceRow'>
+                <div className='row mb-2'>
                     <div className='col-md-3'>
                         <input className='form-control' type='text' placeholder='Title' name='title' id='title' onChange={this.handleInput.bind(this)} required/>
                     </div>
                 </div>
-                <div className='row spaceRow'>
+                <div className='row mb-2'>
                     <div className='col-md-3'>
                         <input className='form-control descriptionRow' type='textarea' rows='2' placeholder='Description' name='description' id='description' onChange={this.handleInput.bind(this)} required/>
                     </div>
                 </div>
-                <div className='row spaceRow'>
+                <div className='row mb-2'>
                     <div className='col-md-5'>
                         <input className='form-control context' type='textarea' rows='6' placeholder='Context' name='context' id='context' onChange={this.handleInput.bind(this)} required/>
                     </div>
                 </div>
-                <div className='roc spaceRow'>
+                <div className='roc mb-2'>
                     <div className='col-md-1'>
-                        <button type="submit" class="btn btn-primary" onClick={()=>{this.props.handleSubmit()}}>Submit</button>
+                        <button type="submit" className="btn btn-primary" onClick={()=>{this.props.handleSubmit()}}>Submit</button>
                     </div>
                 </div>         
             </div> 

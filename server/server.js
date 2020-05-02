@@ -30,10 +30,38 @@ app.get('/getarticles', (req, res)=>{
     });
 });
 
+app.get('/getarticle/:id', (req, res)=>{
+    Article.findById(req.params.id)
+    .select('title description context name')
+    .exec()
+    .then(docs =>{
+        res.status(200).json({
+            result : docs 
+        });
+    })
+    .catch(err =>{
+        console.log(err);
+    });
+});
+
+app.get('/getuser/:name', (req, res)=>{
+    Article.find({name : req.params.name})
+    .select('name age title email userUrlImage')
+    .exec()
+    .then(docs =>{
+        res.status(200).json({
+            result : docs 
+        });
+    })
+    .catch(err =>{
+        console.log(err);
+    });
+});
+
 app.get('/getusers', (req, res)=>{
     console.log('request coming');
     Article.find()
-    .select('userUrlImage name age')
+    .select('userUrlImage name age email')
     .exec()
     .then(docs =>{
         res.status(200).json({

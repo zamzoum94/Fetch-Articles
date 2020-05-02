@@ -1,5 +1,5 @@
 .spaceRow{
-    margin-top: 10px;
+    margin-bottom: 50px;
 }
 
 .descriptionRow{
@@ -8,4 +8,18 @@
 
 .context{
     height: 200px;
+}
+
+.imgContainer{
+    height: 300px;
+    width: 300px;
+}
+
+.imgUserContainer{
+    height: 400px;
+    width: 400px;
+}
+
+.paragraph{
+    font-size: 14px;
 }
