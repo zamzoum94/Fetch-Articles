@@ -18,9 +18,24 @@ app.get('/', (req, res)=>{
 
 app.get('/getarticles', (req, res)=>{
     Article.find()
+    .select('title description')
     .exec()
     .then(docs =>{
-        console.log(docs);
+        res.status(200).json({
+            result : docs 
+        });
+    })
+    .catch(err =>{
+        console.log(err);
+    });
+});
+
+app.get('/getusers', (req, res)=>{
+    console.log('request coming');
+    Article.find()
+    .select('userUrlImage name age')
+    .exec()
+    .then(docs =>{
         res.status(200).json({
             result : docs 
         });
@@ -31,8 +46,6 @@ app.get('/getarticles', (req, res)=>{
 });
 
 app.post('/postarticle', (req, res)=>{
-    console.log(req.body);
-
     let newArticle = new Article({
         _id : new mongoose.Types.ObjectId,
         name : req.body.name,
@@ -46,10 +59,10 @@ app.post('/postarticle', (req, res)=>{
 
     newArticle.save()
     .then(doc=>{
-        console.log(doc);
+        console.log('success');
     })
     .catch(err =>{
-        console.log(err);
+        console.log('failure');
     });
 });
 
