@@ -13,7 +13,21 @@ app.use(bodyParser.urlencoded({extended : true}));
 
 
 app.get('/', (req, res)=>{
+    res.status(200);
+})
 
+app.get('/getarticles', (req, res)=>{
+    Article.find()
+    .exec()
+    .then(docs =>{
+        console.log(docs);
+        res.status(200).json({
+            result : docs 
+        });
+    })
+    .catch(err =>{
+        console.log(err);
+    });
 });
 
 app.post('/postarticle', (req, res)=>{
